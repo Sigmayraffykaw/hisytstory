@@ -16,29 +16,35 @@ def compact_to_int(s):
 
 out={}
 
-# YouTube: public tracker fallback that exposes the public subscriber count.
+# YouTube
 try:
     y=get('https://socialblade.com/youtube/handle/hisytstory')
     for p in [r'subscribers\s*</div>\s*<div[^>]*>\s*([0-9.,]+[KMB]?)', r'His Story@hisytstory.*?subscribers\s*([0-9.,]+[KMB]?)']:
         m=re.search(p,y,re.I|re.S)
         if m:
             v=compact_to_int(m.group(1))
-            if v: out['youtube']=v; break
+            if v and v>100000: out['youtube']=v; break
 except Exception as e:
     print('youtube',e)
 
-# TikTok: public profile analytics page fallback.
+# TikTok: use the profile metric directly and reject tiny false matches.
 try:
-    t=get('https://urlebird.com/user/hisytstory/')
-    for p in [r'([0-9.,]+[KMB]?)\s*(?:followers|seguidores)', r'followers[^0-9]{0,80}([0-9.,]+[KMB]?)']:
-        m=re.search(p,t,re.I|re.S)
-        if m:
+    t=get('https://urlebird.com/es/user/hisytstory/')
+    patterns=[
+        r'([0-9]+(?:\.[0-9]+)?[KMB])\s*(?:seguidores|followers)',
+        r'(?:seguidores|followers)[^0-9]{0,120}([0-9]+(?:\.[0-9]+)?[KMB])'
+    ]
+    for p in patterns:
+        for m in re.finditer(p,t,re.I|re.S):
             v=compact_to_int(m.group(1))
-            if v: out['tiktok']=v; break
+            if v and 100000 <= v <= 1000000000:
+                out['tiktok']=v
+                break
+        if 'tiktok' in out: break
 except Exception as e:
     print('tiktok',e)
 
-# Discord: official invite endpoint with approximate member count.
+# Discord
 try:
     d=json.loads(get('https://discord.com/api/v10/invites/hisytstory?with_counts=true'))
     if isinstance(d.get('approximate_member_count'),int):
