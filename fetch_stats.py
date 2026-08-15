@@ -4,44 +4,53 @@ UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/151 Safa
 
 def get(url):
     req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept-Language':'en-US,en;q=0.9'})
-    with urllib.request.urlopen(req,timeout=20) as r:
+    with urllib.request.urlopen(req,timeout=25) as r:
         return r.read().decode('utf-8','ignore')
 
-def parse_compact(s):
+def compact_to_int(s):
     s=s.replace(',','').strip().upper()
-    m=re.match(r'([0-9]+(?:\.[0-9]+)?)([KMB]?)',s)
+    m=re.search(r'([0-9]+(?:\.[0-9]+)?)([KMB]?)',s)
     if not m:return None
-    n=float(m.group(1)); mult={'':1,'K':1_000,'M':1_000_000,'B':1_000_000_000}[m.group(2)]
+    n=float(m.group(1)); mult={'':1,'K':1000,'M':1000000,'B':1000000000}[m.group(2)]
     return int(n*mult)
 
 out={}
 
+# YouTube: public tracker fallback that exposes the public subscriber count.
 try:
-    y=get('https://www.youtube.com/@hisytstory')
-    pats=[r'"subscriberCountText":\{"simpleText":"([^"]+) subscribers"',r'([0-9.,]+[KMB]?) subscribers']
-    for p in pats:
-        m=re.search(p,y,re.I)
+    y=get('https://socialblade.com/youtube/handle/hisytstory')
+    for p in [r'subscribers\s*</div>\s*<div[^>]*>\s*([0-9.,]+[KMB]?)', r'His Story@hisytstory.*?subscribers\s*([0-9.,]+[KMB]?)']:
+        m=re.search(p,y,re.I|re.S)
         if m:
-            v=parse_compact(m.group(1))
-            if v is not None: out['youtube']=v; break
+            v=compact_to_int(m.group(1))
+            if v: out['youtube']=v; break
 except Exception as e:
-    print('youtube:',e)
+    print('youtube',e)
 
+# TikTok: public profile analytics page fallback.
 try:
-    t=get('https://www.tiktok.com/@hisytstory')
-    pats=[r'"followerCount":(\d+)',r'"followerCount":"(\d+)"']
-    for p in pats:
-        m=re.search(p,t)
+    t=get('https://urlebird.com/user/hisytstory/')
+    for p in [r'([0-9.,]+[KMB]?)\s*(?:followers|seguidores)', r'followers[^0-9]{0,80}([0-9.,]+[KMB]?)']:
+        m=re.search(p,t,re.I|re.S)
         if m:
-            out['tiktok']=int(m.group(1)); break
+            v=compact_to_int(m.group(1))
+            if v: out['tiktok']=v; break
 except Exception as e:
-    print('tiktok:',e)
+    print('tiktok',e)
+
+# Discord: official invite endpoint with approximate member count.
+try:
+    d=json.loads(get('https://discord.com/api/v10/invites/hisytstory?with_counts=true'))
+    if isinstance(d.get('approximate_member_count'),int):
+        out['discord']=d['approximate_member_count']
+except Exception as e:
+    print('discord',e)
 
 try:
     with open('stats.json','r',encoding='utf-8') as f: old=json.load(f)
 except Exception:
     old={}
-for k in ('youtube','tiktok'):
+for k in ('youtube','tiktok','discord'):
     if k not in out and isinstance(old.get(k),int): out[k]=old[k]
 
 with open('stats.json','w',encoding='utf-8') as f:
