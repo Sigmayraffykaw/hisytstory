@@ -29,8 +29,8 @@
         <a href="#team">Team</a>
         <a href="#apply">Apply</a>
         <a href="#reviews">Reviews</a>
-        <a href="#districts">Games</a>
-        <a href="#support">Support</a>
+        <a href="#games">Games</a>
+        <button class="nav-support" id="supportOpen" type="button">Support</button>
       </div>
     </nav>
   </header>
@@ -51,13 +51,35 @@
 
     <section class="intro section" id="about"><div class="section-label reveal"><span>01</span><i></i><b>ABOUT THE CITY</b></div><div class="intro-layout"><h2 class="reveal">A little corner of the internet that feels <em>easy.</em></h2><div class="intro-copy reveal"><p>No pressure to be anything. Drop in, talk about your day, send something funny, jump into a game or sit in VC while everyone does their own thing.</p><p class="muted">Friendly people. Clean chats. Zero NSFW.</p></div></div></section>
 
-    <section class="quick-sections section" id="stats"><div class="section-label reveal"><span>02</span><i></i><b>CITY HUB</b></div><div class="hub-grid"><article id="team" class="hub-card reveal"><span>TEAM</span><h3>Meet the people behind the city.</h3><p>Staff, helpers and the people keeping the server running.</p></article><article id="apply" class="hub-card reveal"><span>APPLY</span><h3>Want to help out?</h3><p>Staff applications and opportunities can be posted here when open.</p></article><article id="reviews" class="hub-card reveal"><span>REVIEWS</span><h3>What people say.</h3><p>A home for community reactions, highlights and member feedback.</p></article><article id="support" class="hub-card reveal"><span>SUPPORT</span><h3>Need help?</h3><p>Join the Discord and reach out to the team for support.</p></article></div></section>
+    <section class="quick-sections section" id="stats"><div class="section-label reveal"><span>02</span><i></i><b>CITY HUB</b></div><div class="hub-grid"><article id="team" class="hub-card reveal"><span>TEAM</span><h3>Meet the people behind the city.</h3><p>Staff, helpers and the people keeping the server running.</p></article><article id="apply" class="hub-card reveal"><span>APPLY</span><h3>Want to help out?</h3><p>Staff applications and opportunities can be posted here when open.</p></article><article id="reviews" class="hub-card reveal"><span>REVIEWS</span><h3>What people say.</h3><p>A home for community reactions, highlights and member feedback.</p></article><article class="hub-card reveal support-card" id="supportCard"><span>SUPPORT</span><h3>Need help?</h3><p>Open Miamidian AI and ask about the server, roles, rules, games, or joining.</p><button type="button" id="supportCardOpen">Chat with Miamidian AI →</button></article></div></section>
 
     <section class="districts section" id="districts"><div class="section-label reveal"><span>03</span><i></i><b>CITY DISTRICTS</b></div><div class="district-grid"><article class="district reveal tilt-card"><div class="district-top"><span>01</span><b>OPEN 24/7</b></div><div class="district-icon">✦</div><div><p>THE SOCIAL DISTRICT</p><h3>Daily chats<br>& memes.</h3><small>Talk, joke around and send whatever has the chat laughing.</small></div></article><article class="district reveal tilt-card"><div class="district-top"><span>02</span><b>QUEUE READY</b></div><div class="district-icon">◈</div><div><p>THE ARCADE</p><h3>Gaming<br>& VCs.</h3><small>Find a squad, join a voice call or hang out while everyone plays.</small></div></article><article class="district reveal tilt-card"><div class="district-top"><span>03</span><b>PROTECTED</b></div><div class="district-icon">◇</div><div><p>THE SAFE ZONE</p><h3>Strictly<br>SFW.</h3><small>A friendly space with a simple rule: keep it clean and comfortable.</small></div></article></div></section>
 
     <section class="manifesto section"><div class="manifesto-inner reveal"><span>MIAMIDIAN CITY CODE</span><p>Be chill. Be friendly.<br><strong>Make the server better by being in it.</strong></p></div></section>
     <section class="final-cta"><div class="reveal"><span class="kicker">YOUR INVITE IS WAITING</span><h2>See you in<br>the <em>city.</em></h2><p>Grab a role and come hang out.</p><a class="primary-btn magnetic" href="https://discord.gg/WPEwDUtGfC" target="_blank" rel="noreferrer"><span>Join Sir. Miamidian’s City</span><b>↗</b></a></div></section>
+
+    <section class="games-bottom" id="games">
+      <div class="games-inner reveal">
+        <div class="games-kicker">PLAY AFTER DARK</div>
+        <h2>Games in the City.</h2>
+        <p>Find people in Discord, hop into VC, and start a session.</p>
+        <div class="game-row">
+          <article><span>01</span><b>Minecraft</b><small>Build, survive, chill.</small></article>
+          <article><span>02</span><b>Roblox</b><small>Jump into whatever’s trending.</small></article>
+          <article><span>03</span><b>Fortnite</b><small>Squad up and queue.</small></article>
+          <article><span>04</span><b>Community Picks</b><small>Whatever everyone wants tonight.</small></article>
+        </div>
+        <a href="https://discord.gg/WPEwDUtGfC" target="_blank" rel="noreferrer">Find a squad ↗</a>
+      </div>
+    </section>
   </main>
+
+  <aside class="ai-chat" id="aiChat" aria-hidden="true">
+    <div class="ai-chat-head"><div><img src="e2ee8997-70c9-4e8d-96fa-a958f03dcc21.png" alt=""><span><b>Miamidian AI</b><small>City support assistant</small></span></div><button type="button" id="supportClose" aria-label="Close support chat">×</button></div>
+    <div class="ai-chat-messages" id="aiMessages"><div class="ai-msg bot">Hey 👋 I’m Miamidian AI. Ask me about joining, rules, roles, games, VCs, or where to get help.</div></div>
+    <form class="ai-chat-form" id="aiForm"><input id="aiInput" type="text" maxlength="180" autocomplete="off" placeholder="Ask about the city…"><button type="submit">Send</button></form>
+    <div class="ai-note">Fast on-site assistant. For staff help, join Discord.</div>
+  </aside>
 
   <div class="music-player" id="musicPlayer"><button id="musicToggle" aria-label="Play original ambient city music"><span>▶</span></button><div class="music-meta"><small>NOW PLAYING</small><b>Midnight in Miamidian</b><span id="musicStatus">Tap to play ambience</span></div><input id="volume" type="range" min="0" max="1" step="0.01" value="0.35" aria-label="Music volume"></div>
   <footer>Sir. Miamidian’s City © 2026</footer>
