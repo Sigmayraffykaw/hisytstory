@@ -31,30 +31,7 @@
     <section class="final-cta"><div class="reveal"><span class="kicker">YOUR INVITE IS WAITING</span><h2>See you in<br>the <em>city.</em></h2><p>Grab a role and come hang out.</p><a class="primary-btn magnetic" href="https://discord.gg/WPEwDUtGfC" target="_blank" rel="noreferrer"><span>Join Sir. Miamidian’s City</span><b>↗</b></a></div></section>
 
     <section class="games-bottom" id="games">
-      <div class="games-inner reveal">
-        <div class="games-kicker">MIAMIDIAN WEB ARCADE</div>
-        <h2>Play without leaving the site.</h2>
-        <p>Three quick browser games built straight into Miamidian.</p>
-        <div class="web-arcade">
-          <article class="web-game">
-            <div class="web-game-head"><span>01</span><div><b>Click Rush</b><small>Hit the orb as many times as you can in 15 seconds.</small></div></div>
-            <div class="click-game" id="clickGame"><button id="clickTarget" type="button" aria-label="Click target">✦</button></div>
-            <div class="game-controls"><button id="clickStart" type="button">Start game</button><span>Score: <b id="clickScore">0</b></span><span>Time: <b id="clickTime">15</b>s</span></div>
-          </article>
-
-          <article class="web-game">
-            <div class="web-game-head"><span>02</span><div><b>Reaction Test</b><small>Wait for the panel to flash blue, then click as fast as possible.</small></div></div>
-            <button class="reaction-pad" id="reactionPad" type="button">PRESS START</button>
-            <div class="game-controls"><button id="reactionStart" type="button">Start test</button><span id="reactionResult">Best: —</span></div>
-          </article>
-
-          <article class="web-game">
-            <div class="web-game-head"><span>03</span><div><b>Memory Lights</b><small>Watch the pattern, then repeat it.</small></div></div>
-            <div class="memory-grid" id="memoryGrid"><button data-cell="0" type="button"></button><button data-cell="1" type="button"></button><button data-cell="2" type="button"></button><button data-cell="3" type="button"></button></div>
-            <div class="game-controls"><button id="memoryStart" type="button">Start memory</button><span>Level: <b id="memoryLevel">0</b></span><span id="memoryStatus">Ready</span></div>
-          </article>
-        </div>
-      </div>
+      <div class="games-inner reveal"><div class="games-kicker">LOADING ARCADE</div><h2>Games</h2><p>Playable games are loading…</p></div>
     </section>
   </main>
 
@@ -63,5 +40,6 @@
   <div class="music-player" id="musicPlayer"><button id="musicToggle" aria-label="Play original ambient city music"><span>▶</span></button><div class="music-meta"><small>NOW PLAYING</small><b>Midnight in Miamidian</b><span id="musicStatus">Tap to play ambience</span></div><input id="volume" type="range" min="0" max="1" step="0.01" value="0.35" aria-label="Music volume"></div>
   <footer>Sir. Miamidian’s City © 2026</footer>
   <script src="script.js"></script>
+  <script src="arcade.js"></script>
 </body>
 </html>
