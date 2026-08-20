@@ -12,9 +12,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="starfield" aria-hidden="true"></canvas>
-  <div class="aurora aurora-one"></div><div class="aurora aurora-two"></div>
-  <div class="noise" aria-hidden="true"></div><div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
   <header class="nav-wrap">
     <nav class="city-nav">
@@ -32,53 +31,62 @@
         <a href="#districts">Games</a>
         <a href="#support">Support</a>
       </div>
-      <a class="nav-join" href="https://discord.gg/WPEwDUtGfC" target="_blank" rel="noreferrer">Join <span>↗</span></a>
     </nav>
   </header>
 
   <main>
     <section class="hero" id="home">
-      <div class="hero-grid"></div><div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
-      <div class="hero-content reveal">
-        <div class="kicker"><span class="pulse"></span> THE CITY IS ONLINE</div>
-        <h1>Meet us<br>after <em>dark.</em></h1>
-        <p>Welcome to <strong>Sir. Miamidian’s City</strong> — a chill, strictly SFW hangout to relax, talk, share memes, game and meet cool people.</p>
-        <div class="hero-actions"><a class="primary-btn magnetic" href="https://discord.gg/WPEwDUtGfC" target="_blank" rel="noreferrer"><span>Join the City</span><b>↗</b></a><a class="text-btn" href="#about">Explore the city <span>↓</span></a></div>
+      <div class="hero-shade"></div>
+      <div class="hero-center reveal">
+        <div class="hero-logo-wrap">
+          <div class="logo-glow"></div>
+          <img class="hero-logo" src="e2ee8997-70c9-4e8d-96fa-a958f03dcc21.png" alt="Miamidian mascot">
+        </div>
+        <div class="hero-star">✦</div>
+        <h1>Welcome to <span>Sir. Miamidian’s City</span></h1>
+        <p>Just a chill, SFW hangout server to relax, chat, and play games with cool people.</p>
+        <div class="hero-actions">
+          <a class="hero-join magnetic" href="https://discord.gg/WPEwDUtGfC" target="_blank" rel="noreferrer"><span>🚀</span> Join our city</a>
+          <a class="hero-secondary" href="#about">Explore the city ↓</a>
+        </div>
       </div>
-      <div class="city-stage reveal" aria-hidden="true">
-        <div class="planet"><div class="planet-ring"></div></div><div class="shooting-star s1"></div><div class="shooting-star s2"></div>
-        <div class="skyline far"><i style="--h:28%"></i><i style="--h:46%"></i><i style="--h:35%"></i><i style="--h:61%"></i><i style="--h:42%"></i><i style="--h:55%"></i><i style="--h:31%"></i><i style="--h:68%"></i><i style="--h:47%"></i><i style="--h:37%"></i><i style="--h:58%"></i></div>
-        <div class="skyline near"><i style="--h:34%"></i><i style="--h:62%"></i><i class="spire" style="--h:82%"></i><i style="--h:52%"></i><i style="--h:72%"></i><i style="--h:43%"></i><i style="--h:64%"></i></div>
-        <div class="street"><span></span></div><div class="coordinates"><span>27.4698° S</span><span>153.0251° E</span></div><div class="city-stamp">SIR. MIAMIDIAN’S<br><b>CITY / 001</b></div>
-      </div>
-      <div class="scroll-cue"><span>SCROLL TO EXPLORE</span><i></i></div>
+      <a class="floating-chat" href="https://discord.gg/WPEwDUtGfC" target="_blank" rel="noreferrer" aria-label="Open Discord">💬</a>
+      <button class="floating-music" id="heroMusic" aria-label="Toggle music">♫</button>
     </section>
 
-    <section class="ticker" aria-hidden="true"><div><span>CHAT</span> ✦ <span>MEMES</span> ✦ <span>GAMING</span> ✦ <span>VOICE CHATS</span> ✦ <span>STRICTLY SFW</span> ✦ <span>GOOD VIBES</span> ✦ <span>CHAT</span> ✦ <span>MEMES</span> ✦ <span>GAMING</span> ✦</div></section>
+    <section class="intro section" id="about">
+      <div class="section-label reveal"><span>01</span><i></i><b>ABOUT THE CITY</b></div>
+      <div class="intro-layout">
+        <h2 class="reveal">A little corner of the internet that feels <em>easy.</em></h2>
+        <div class="intro-copy reveal"><p>No pressure to be anything. Drop in, talk about your day, send something funny, jump into a game or sit in VC while everyone does their own thing.</p><p class="muted">Friendly people. Clean chats. Zero NSFW.</p></div>
+      </div>
+    </section>
 
-    <section class="intro section" id="about"><div class="section-label reveal"><span>01</span><i></i><b>ABOUT THE CITY</b></div><div class="intro-layout"><h2 class="reveal">A little corner of the internet that feels <em>easy.</em></h2><div class="intro-copy reveal"><p>No pressure to be anything. Drop in, talk about your day, send something funny, jump into a game or sit in VC while everyone does their own thing.</p><p class="muted">Friendly people. Clean chats. Zero NSFW.</p></div></div></section>
+    <section class="quick-sections section" id="stats">
+      <div class="section-label reveal"><span>02</span><i></i><b>CITY HUB</b></div>
+      <div class="hub-grid">
+        <article id="team" class="hub-card reveal"><span>TEAM</span><h3>Meet the people behind the city.</h3><p>Staff, helpers and the people keeping the server running.</p></article>
+        <article id="apply" class="hub-card reveal"><span>APPLY</span><h3>Want to help out?</h3><p>Staff applications and opportunities can be posted here when open.</p></article>
+        <article id="reviews" class="hub-card reveal"><span>REVIEWS</span><h3>What people say.</h3><p>A home for community reactions, highlights and member feedback.</p></article>
+        <article id="support" class="hub-card reveal"><span>SUPPORT</span><h3>Need help?</h3><p>Join the Discord and reach out to the team for support.</p></article>
+      </div>
+    </section>
 
-    <section class="quick-sections section" id="stats"><div class="section-label reveal"><span>02</span><i></i><b>CITY HUB</b></div><div class="hub-grid">
-      <article id="team" class="hub-card reveal"><span>TEAM</span><h3>Meet the people behind the city.</h3><p>Staff, helpers and the people keeping the server running.</p></article>
-      <article id="apply" class="hub-card reveal"><span>APPLY</span><h3>Want to help out?</h3><p>Staff applications and opportunities can be posted here when open.</p></article>
-      <article id="reviews" class="hub-card reveal"><span>REVIEWS</span><h3>What people say.</h3><p>A home for community reactions, highlights and member feedback.</p></article>
-      <article id="support" class="hub-card reveal"><span>SUPPORT</span><h3>Need help?</h3><p>Join the Discord and reach out to the team for support.</p></article>
-    </div></section>
-
-    <section class="districts section" id="districts"><div class="section-label reveal"><span>03</span><i></i><b>CITY DISTRICTS</b></div><div class="district-grid">
-      <article class="district district-chat reveal tilt-card"><div class="district-top"><span>01</span><b>OPEN 24/7</b></div><div class="district-icon">✦</div><div><p>THE SOCIAL DISTRICT</p><h3>Daily chats<br>& memes.</h3><small>Talk, joke around and send whatever has the chat laughing.</small></div></article>
-      <article class="district district-game reveal tilt-card"><div class="district-top"><span>02</span><b>QUEUE READY</b></div><div class="district-icon">◈</div><div><p>THE ARCADE</p><h3>Gaming<br>& VCs.</h3><small>Find a squad, join a voice call or hang out while everyone plays.</small></div></article>
-      <article class="district district-safe reveal tilt-card"><div class="district-top"><span>03</span><b>PROTECTED</b></div><div class="district-icon">◇</div><div><p>THE SAFE ZONE</p><h3>Strictly<br>SFW.</h3><small>A friendly space with a simple rule: keep it clean and comfortable.</small></div></article>
-    </div></section>
-
-    <section class="vibe-section section" id="vibe"><div class="section-label reveal"><span>04</span><i></i><b>CURRENT ATMOSPHERE</b></div><div class="vibe-panel reveal"><div class="vibe-visual"><div class="horizon"></div><div class="vibe-moon"></div><div class="floating-word w1">CHILL</div><div class="floating-word w2">PLAY</div><div class="floating-word w3">TALK</div></div><div class="vibe-copy"><div class="live"><span></span> CITY STATUS: ONLINE</div><h2>Blue lights.<br>Good people.<br><em>No drama.</em></h2><p>Grab a role, say hey and stay as long as you want.</p><a class="primary-btn magnetic" href="https://discord.gg/WPEwDUtGfC" target="_blank" rel="noreferrer"><span>Come hang out</span><b>↗</b></a></div></div></section>
+    <section class="districts section" id="districts">
+      <div class="section-label reveal"><span>03</span><i></i><b>CITY DISTRICTS</b></div>
+      <div class="district-grid">
+        <article class="district reveal tilt-card"><div class="district-top"><span>01</span><b>OPEN 24/7</b></div><div class="district-icon">✦</div><div><p>THE SOCIAL DISTRICT</p><h3>Daily chats<br>& memes.</h3><small>Talk, joke around and send whatever has the chat laughing.</small></div></article>
+        <article class="district reveal tilt-card"><div class="district-top"><span>02</span><b>QUEUE READY</b></div><div class="district-icon">◈</div><div><p>THE ARCADE</p><h3>Gaming<br>& VCs.</h3><small>Find a squad, join a voice call or hang out while everyone plays.</small></div></article>
+        <article class="district reveal tilt-card"><div class="district-top"><span>03</span><b>PROTECTED</b></div><div class="district-icon">◇</div><div><p>THE SAFE ZONE</p><h3>Strictly<br>SFW.</h3><small>A friendly space with a simple rule: keep it clean and comfortable.</small></div></article>
+      </div>
+    </section>
 
     <section class="manifesto section"><div class="manifesto-inner reveal"><span>MIAMIDIAN CITY CODE</span><p>Be chill. Be friendly.<br><strong>Make the server better by being in it.</strong></p></div></section>
-    <section class="final-cta"><div class="final-glow"></div><div class="reveal"><span class="kicker">YOUR INVITE IS WAITING</span><h2>See you in<br>the <em>city.</em></h2><p>Grab a role and come hang out.</p><a class="primary-btn primary-large magnetic" href="https://discord.gg/WPEwDUtGfC" target="_blank" rel="noreferrer"><span>Join Sir. Miamidian’s City</span><b>↗</b></a></div></section>
+    <section class="final-cta"><div class="reveal"><span class="kicker">YOUR INVITE IS WAITING</span><h2>See you in<br>the <em>city.</em></h2><p>Grab a role and come hang out.</p><a class="primary-btn magnetic" href="https://discord.gg/WPEwDUtGfC" target="_blank" rel="noreferrer"><span>Join Sir. Miamidian’s City</span><b>↗</b></a></div></section>
   </main>
 
-  <div class="music-player" id="musicPlayer"><button id="musicToggle" aria-label="Play original ambient city music"><span>▶</span></button><div class="music-meta"><small>NOW PLAYING</small><b>Midnight in Miamidian</b><span id="musicStatus">Tap to play original ambience</span></div><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><input id="volume" type="range" min="0" max="1" step="0.01" value="0.35" aria-label="Music volume"></div>
-  <footer><a class="brand footer-brand" href="#home"><span class="brand-mark">M</span><span>MIAMIDIAN</span></a><p>Sir. Miamidian’s City © 2026</p><a href="https://discord.gg/WPEwDUtGfC" target="_blank" rel="noreferrer">Discord ↗</a></footer>
+  <div class="music-player" id="musicPlayer"><button id="musicToggle" aria-label="Play original ambient city music"><span>▶</span></button><div class="music-meta"><small>NOW PLAYING</small><b>Midnight in Miamidian</b><span id="musicStatus">Tap to play ambience</span></div><input id="volume" type="range" min="0" max="1" step="0.01" value="0.35" aria-label="Music volume"></div>
+  <footer>Sir. Miamidian’s City © 2026</footer>
   <script src="script.js"></script>
 </body>
 </html>
