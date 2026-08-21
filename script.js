@@ -24,18 +24,69 @@ if(toggle)toggle.addEventListener('click',()=>setPlaying(!musicPlaying));if(hero
 const menuToggle=document.getElementById('menuToggle'),navLinks=document.getElementById('navLinks');if(menuToggle&&navLinks)menuToggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
 const navAnchors=[...document.querySelectorAll('.nav-links a[href^="#"]')],tracked=navAnchors.map(a=>({a,el:document.querySelector(a.getAttribute('href'))})).filter(x=>x.el);function updateActiveNav(){const marker=scrollY+110;let current=tracked[0];for(const item of tracked){if(item.el.offsetTop<=marker)current=item}navAnchors.forEach(a=>a.classList.remove('active'));if(current)current.a.classList.add('active')}window.addEventListener('scroll',updateActiveNav,{passive:true});updateActiveNav();navAnchors.forEach(a=>a.addEventListener('click',()=>{navAnchors.forEach(x=>x.classList.remove('active'));a.classList.add('active');navLinks?.classList.remove('open')}));
 
-const aiChat=document.getElementById('aiChat'),aiMessages=document.getElementById('aiMessages'),aiForm=document.getElementById('aiForm'),aiInput=document.getElementById('aiInput');const openers=[document.getElementById('supportOpen'),document.getElementById('supportCardOpen')].filter(Boolean),closeAI=document.getElementById('supportClose');function openAI(){aiChat?.classList.add('open');aiChat?.setAttribute('aria-hidden','false');setTimeout(()=>aiInput?.focus(),120)}function closeAIFn(){aiChat?.classList.remove('open');aiChat?.setAttribute('aria-hidden','true')}openers.forEach(b=>b.addEventListener('click',openAI));closeAI?.addEventListener('click',closeAIFn);function addMsg(text,type){const d=document.createElement('div');d.className=`ai-msg ${type}`;d.textContent=text;aiMessages.appendChild(d);aiMessages.scrollTop=aiMessages.scrollHeight}function replyFor(q){const s=q.toLowerCase();if(/join|invite|discord/.test(s))return 'You can join with the Join our city button, or use discord.gg/WPEwDUtGfC.';if(/nsfw|rule|rules|safe|sfw/.test(s))return 'The city is strictly SFW and friendly. Keep content clean, respect people, and avoid drama.';if(/game|arcade|click|reaction|memory/.test(s))return 'Check the Steam Games section at the bottom and use the filters to find FPS, Action, or Multiplayer games.';if(/role|roles/.test(s))return 'Join the Discord, then grab the roles you want from the server’s role channels.';if(/vc|voice|call/.test(s))return 'Gaming and voice chats are part of the server. Join Discord and look for active VCs or start one with friends.';if(/staff|mod|admin|help|report/.test(s))return 'For a real staff issue or report, join the Discord and contact the moderation team there.';if(/hello|hey|hi/.test(s))return 'Hey 👋 Welcome to Miamidian. Ask me about joining, rules, roles, games, VCs, or support.';return 'I can help with joining, rules, roles, games, VCs, and basic support. For anything account- or staff-specific, use the Discord.'}aiForm?.addEventListener('submit',e=>{e.preventDefault();const q=aiInput.value.trim();if(!q)return;addMsg(q,'user');aiInput.value='';setTimeout(()=>addMsg(replyFor(q),'bot'),320)});
+// MIAMIDIAN SUPPORT BOT 2.0 — smarter local assistant with context, quick prompts and typing feedback.
+const aiChat=document.getElementById('aiChat'),aiMessages=document.getElementById('aiMessages'),aiForm=document.getElementById('aiForm'),aiInput=document.getElementById('aiInput');
+const openers=[document.getElementById('supportOpen'),document.getElementById('supportCardOpen')].filter(Boolean),closeAI=document.getElementById('supportClose');
+let lastTopic='general',messageCount=0;
+
+function openAI(){aiChat?.classList.add('open');aiChat?.setAttribute('aria-hidden','false');setTimeout(()=>aiInput?.focus(),120)}
+function closeAIFn(){aiChat?.classList.remove('open');aiChat?.setAttribute('aria-hidden','true')}
+openers.forEach(b=>b.addEventListener('click',openAI));closeAI?.addEventListener('click',closeAIFn);
+
+function addMsg(text,type,html=false){const d=document.createElement('div');d.className=`ai-msg ${type}`;if(html)d.innerHTML=text;else d.textContent=text;aiMessages.appendChild(d);aiMessages.scrollTop=aiMessages.scrollHeight;return d}
+function addTyping(){const d=addMsg('Miamidian is typing…','bot');d.classList.add('typing');return d}
+function clean(s){return s.toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim()}
+function has(s,words){return words.some(w=>s.includes(w))}
+
+const answers={
+  join:'You can join the city here: discord.gg/WPEwDUtGfC. After joining, grab your roles and say hey in chat.',
+  rules:'The server is strictly SFW and friendly. Keep content clean, respect everyone, avoid spam and drama, and follow staff directions.',
+  roles:'Roles are handled inside Discord. Join the server, then check the role channels to choose what fits you.',
+  vc:'Yep — we have gaming and voice chats. Join the Discord and check the active VCs or start one with friends.',
+  games:'Scroll to the Steam Games section at the bottom. You can browse the game cards and open each one on Steam.',
+  staff:'For reports, moderation issues, bans, or something that needs a real person, contact the staff team inside Discord.',
+  music:'Use the music button on the page to toggle Midnight in Miamidian. The volume slider controls it.',
+  site:'This is the official Miamidian City site. You can explore the community, games, support bot, music, and Discord invite here.',
+  sfw:'Yes — Sir. Miamidian’s City is strictly SFW. NSFW content is not allowed.',
+  hello:'Hey 👋 Welcome to Miamidian. I can help with joining, rules, roles, games, VCs, music, and staff support.'
+};
+
+function detectTopic(q){const s=clean(q);
+  if(has(s,['join','invite','discord link','server link','how do i get in']))return'join';
+  if(has(s,['rule','rules','allowed','not allowed','ban rule','guideline']))return'rules';
+  if(has(s,['nsfw','sfw','safe']))return'sfw';
+  if(has(s,['role','roles','rank']))return'roles';
+  if(has(s,['vc','voice','call','voice chat']))return'vc';
+  if(has(s,['game','games','steam','counter strike','cs2','dota','brawlhalla','apex','rust','unturned','garry']))return'games';
+  if(has(s,['staff','mod','admin','report','ban','appeal','help me','moderator']))return'staff';
+  if(has(s,['music','song','audio','volume','midnight']))return'music';
+  if(has(s,['website','site','page','what is this']))return'site';
+  if(has(s,['hello','hey','hi ','hi','yo','sup']))return'hello';
+  return null;
+}
+
+function replyFor(q){const s=clean(q),topic=detectTopic(q);if(topic){lastTopic=topic;return answers[topic]}
+  if(has(s,['where','how','what'])&&lastTopic!=='general')return `About ${lastTopic}: ${answers[lastTopic]}`;
+  if(has(s,['thanks','thank you','ty']))return 'Anytime 💙';
+  if(has(s,['who are you','your name']))return 'I’m Miamidian AI — the site support assistant for Sir. Miamidian’s City.';
+  if(has(s,['who made','owner','owns']))return 'This site is for Sir. Miamidian’s City. For owner or staff details, check the Discord team information.';
+  if(has(s,['free','cost','price']))return 'Joining the Discord is free. Steam game prices depend on Steam and can change.';
+  if(has(s,['best game','recommend','recommendation']))return 'For fast multiplayer, try Counter-Strike 2 or Apex Legends. For sandbox chaos, Garry’s Mod or Rust is a better fit.';
+  return 'I’m not fully sure what you mean yet. Try asking about **joining**, **rules**, **roles**, **games**, **VCs**, **music**, or **staff support**.';
+}
+
+function askBot(q){messageCount++;addMsg(q,'user');aiInput.value='';const typing=addTyping();const delay=Math.min(850,300+q.length*8);setTimeout(()=>{typing.remove();addMsg(replyFor(q),'bot')},delay)}
+aiForm?.addEventListener('submit',e=>{e.preventDefault();const q=aiInput.value.trim();if(q)askBot(q)});
+
+// Quick question buttons
+if(aiForm&&aiMessages&&!document.getElementById('aiQuick')){
+  const quick=document.createElement('div');quick.id='aiQuick';quick.className='ai-quick';
+  ['How do I join?','What are the rules?','What games are here?','I need staff help'].forEach(label=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',()=>askBot(label));quick.appendChild(b)});
+  aiForm.parentNode.insertBefore(quick,aiForm);
+  const css=document.createElement('style');css.textContent=`.ai-quick{display:flex;gap:7px;flex-wrap:wrap;padding:0 12px 10px}.ai-quick button{border:1px solid rgba(100,190,255,.28);background:rgba(17,82,145,.22);color:#bfe2ff;padding:8px 10px;border-radius:999px;font-size:10px;font-weight:800}.ai-quick button:hover{background:rgba(25,117,204,.38);color:#fff}.ai-msg.typing{opacity:.65;font-style:italic}.ai-msg bot strong{color:#fff}`;document.head.appendChild(css);
+}
 
 // Steam library filters
 const steamFilterButtons=[...document.querySelectorAll('.steam-filters button')];
 const steamCards=[...document.querySelectorAll('.steam-card')];
-steamFilterButtons.forEach(btn=>btn.addEventListener('click',()=>{
-  const filter=btn.textContent.trim().toLowerCase();
-  steamFilterButtons.forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  steamCards.forEach(card=>{
-    const searchable=(card.querySelector('.steam-card-body')?.textContent||'').toLowerCase();
-    const show=filter==='all'||searchable.includes(filter);
-    card.style.display=show?'':'none';
-  });
-}));
+steamFilterButtons.forEach(btn=>btn.addEventListener('click',()=>{const filter=btn.textContent.trim().toLowerCase();steamFilterButtons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');steamCards.forEach(card=>{const searchable=(card.querySelector('.steam-card-body')?.textContent||'').toLowerCase();card.style.display=filter==='all'||searchable.includes(filter)?'':'none'})}));
