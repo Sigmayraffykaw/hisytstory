@@ -18,17 +18,17 @@ async def booster_perks(
     embed = discord.Embed(
         title="💎 Server Booster Benefits",
         description=(
-            "**Thank you to all members who support our server!**\n"
-            "As a Server Booster, you gain access to exclusive benefits:\n\n"
-            f"• **Exclusive Booster Role:** {booster_role.mention}\n"
-            "A special role with a unique appearance on the server\n\n"
-            "• **Image Permissions:** Permission to send images\n\n"
-            "• **GIF Permissions:** Permission to send GIFs\n\n"
-            "• **Exclusive Role Color & Icon:** A unique color & icon for your booster role\n\n"
-            "• **Reactions:** Ability to add reactions to messages\n\n"
-            "• **Set Voice Channel Status:** Ability to set the status of the voice channel\n\n"
-            "• **Use External Sounds:** Ability to use external sounds on the server\n\n"
-            "• **Create Polls:** Permission to create polls on the server\n\n"
+            "**Thank you to all members who support our server!**\\n"
+            "As a Server Booster, you gain access to exclusive benefits:\\n\\n"
+            f"• **Exclusive Booster Role:** {booster_role.mention}\\n"
+            "A special role with a unique appearance on the server\\n\\n"
+            "• **Image Permissions:** Permission to send images\\n\\n"
+            "• **GIF Permissions:** Permission to send GIFs\\n\\n"
+            "• **Exclusive Role Color & Icon:** A unique color & icon for your booster role\\n\\n"
+            "• **Reactions:** Ability to add reactions to messages\\n\\n"
+            "• **Set Voice Channel Status:** Ability to set the status of the voice channel\\n\\n"
+            "• **Use External Sounds:** Ability to use external sounds on the server\\n\\n"
+            "• **Create Polls:** Permission to create polls on the server\\n\\n"
             "• **Nickname Changes:** Ability to change your nickname"
         ),
         color=discord.Color.from_rgb(255, 85, 200),
@@ -67,17 +67,17 @@ async def dot_booster_perks(ctx: commands.Context, booster_role: discord.Role, c
     embed = discord.Embed(
         title="💎 Server Booster Benefits",
         description=(
-            "**Thank you to all members who support our server!**\n"
-            "As a Server Booster, you gain access to exclusive benefits:\n\n"
-            f"• **Exclusive Booster Role:** {booster_role.mention}\n"
-            "A special role with a unique appearance on the server\n\n"
-            "• **Image Permissions:** Permission to send images\n\n"
-            "• **GIF Permissions:** Permission to send GIFs\n\n"
-            "• **Exclusive Role Color & Icon:** A unique color & icon for your booster role\n\n"
-            "• **Reactions:** Ability to add reactions to messages\n\n"
-            "• **Set Voice Channel Status:** Ability to set the status of the voice channel\n\n"
-            "• **Use External Sounds:** Ability to use external sounds on the server\n\n"
-            "• **Create Polls:** Permission to create polls on the server\n\n"
+            "**Thank you to all members who support our server!**\\n"
+            "As a Server Booster, you gain access to exclusive benefits:\\n\\n"
+            f"• **Exclusive Booster Role:** {booster_role.mention}\\n"
+            "A special role with a unique appearance on the server\\n\\n"
+            "• **Image Permissions:** Permission to send images\\n\\n"
+            "• **GIF Permissions:** Permission to send GIFs\\n\\n"
+            "• **Exclusive Role Color & Icon:** A unique color & icon for your booster role\\n\\n"
+            "• **Reactions:** Ability to add reactions to messages\\n\\n"
+            "• **Set Voice Channel Status:** Ability to set the status of the voice channel\\n\\n"
+            "• **Use External Sounds:** Ability to use external sounds on the server\\n\\n"
+            "• **Create Polls:** Permission to create polls on the server\\n\\n"
             "• **Nickname Changes:** Ability to change your nickname"
         ),
         color=discord.Color.from_rgb(255, 85, 200),
@@ -107,7 +107,6 @@ if dot_marker not in text:
     raise RuntimeError("Could not find ghelp command")
 text = text.replace(dot_marker, dot_code + dot_marker, 1)
 
-# Add help line.
 help_marker = 'embed.description = ('
 idx = text.find(help_marker)
 if idx != -1:
